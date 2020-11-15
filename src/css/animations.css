@@ -1,0 +1,8 @@
+@keyframes slidefromabove {
+    from {top: -1000px;}
+    to {top: 0px;}
+}
+@keyframes slidebackabove {
+    from {top: 0px;}
+    to {top: -1000px;}
+}
