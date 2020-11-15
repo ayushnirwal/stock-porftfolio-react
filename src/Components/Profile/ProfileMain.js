@@ -75,18 +75,19 @@ const styles={
         backgroundColor:"#4D85F1",
         boxShadow:"2px 2px 20px black",
         bottom:"30px",
-        right:"30px"
+        right:"30px",
+        cursor:"pointer",
     },
     hide:{
         opacity:0,
         pointerEvents:"none",
-        height:"100vh",
+        
         width:"100%",
     },
     show:{
         opacity:1,
         pointerEvents:"all",
-        height:"100vh",
+        
         width:"100%"
     },
     noProfile:{

@@ -226,57 +226,66 @@ const AddProfile = observer(({show,dismiss}) => {
                     </p>
 
                     <div style={styles.nameFieldContainer} className="container row valign-wrapper">
-                        <input className="container col s12" style={styles.nameField} type="text" placeholder="Add Profile Name" onChange={(e)=>{setName(e.target.value)}}/> 
+                        <input className="container col l6 s11 center-align" style={styles.nameField} type="text" placeholder="Add Profile Name" onChange={(e)=>{setName(e.target.value)}}/> 
                     </div>
 
-                    <div className="" style={styles.bubbleListContainer}>
-                        <span style={styles.smallHead} >
-                            Buy
-                        </span>
-                        <span>
-                            {buyBubbleList}
-                        </span>
-                    </div>
-                    <div className="" style={styles.bubbleListContainer}>
-                        <span style={styles.smallHead} >
-                            Sell
-                        </span>
-                        <span>
-                            {sellBubbleList}
-                        </span>
-                    </div>
-
-                    
-                    
-                    <div className="row valign-wrapper" style={styles.searchArea}>
-                        <div style={styles.searchBox} className="row col s8 valign-wrapper">
-                            <input className="col s8" style={styles.searchField} type="text" placeholder="Search" onChange={(e)=>{setSearchName(e.target.value)}}/> 
-                            
-                            <i className="material-icons col s2"> search </i>
-                            
-                            
+                    <div className="row" style={{margin:"0"}}>
+                        <div className="col l5 s11" style={styles.bubbleListContainer}>
+                            <span style={styles.smallHead} >
+                                Buy
+                            </span>
+                            <span>
+                                {buyBubbleList}
+                            </span>
                         </div>
-                        <div className="col s3" >
-                            <div style={styles.sort} className="">
-                                <span>{sortBy}</span>
-                                <i className="material-icons right-align" onClick={()=>{setShowDrop(true)}}> arrow_drop_down </i>
-                            </div>
-                            
-                            <div style={{...styles.dropDown,...((showDrop)?styles.show:styles.hide)}} >
-                                <p onClick={()=>{setSortBy("name")}}>sort by name</p>
-                                <p onClick={()=>{setSortBy("price")}}>sort by price</p>
-                            </div>
+                        <div className=" col l5 s11" style={styles.bubbleListContainer}>
+                            <span style={styles.smallHead} >
+                                Sell
+                            </span>
+                            <span>
+                                {sellBubbleList}
+                            </span>
                         </div>
                     </div>
-                    
 
-                    <div style={styles.niftyListContainer}>
-                        {niftyList}
-                    </div>
                     
-                    <div style={{width:"100%"}} className="row">
-                        <p onClick={()=>{out()}} style={styles.button} className=" col s5 center-align"> Discard </p>
-                        <p onClick={()=>{addProfile()}} style={styles.button} className="col s5 center-align"> add </p>
+                    <div className="s6 container" style={styles.selectorContainer}>
+                        <div className="row valign-wrapper" style={styles.searchArea}>
+                            <div style={styles.searchBox} className="row col s8 valign-wrapper">
+                                <input className="col s8" style={styles.searchField} type="text" placeholder="Search" onChange={(e)=>{setSearchName(e.target.value)}}/> 
+                                
+                                <i className="material-icons col s2"> search </i>
+                                
+                                
+                            </div>
+                            <div className="col s3" >
+                                <div style={styles.sort} onClick={()=>{setShowDrop(true)}}>
+                                    <span>{sortBy}</span>
+                                    <i className="material-icons right-align" > arrow_drop_down </i>
+                                </div>
+                                
+                                <div style={{...styles.dropDown,...((showDrop)?styles.show:styles.hide)}} >
+                                    <div onClick={()=>{setSortBy("name")}} style={{cursor:"pointer"}}>
+                                        <p onClick={()=>{setSortBy("name")}} >sort by name</p>
+                                    </div>
+                                    <div onClick={()=>{setSortBy("price")}} style={{cursor:"pointer"}} >
+                                        <p onClick={()=>{setSortBy("price")}}>sort by price</p>
+                                    </div>
+                                    
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <div style={styles.niftyListContainer}>
+                            {niftyList}
+                        </div>
+                        
+                        <div style={{width:"100%"}} className="row">
+                            <p onClick={()=>{out()}} style={styles.button} className=" col s5 center-align"> Discard </p>
+                            <p onClick={()=>{addProfile()}} style={styles.button} className="col s5 center-align"> add </p>
+                        </div>
                     </div>
                     
 
@@ -317,7 +326,7 @@ const styles={
     bubbleListContainer:{
         height:"10vh",
         overflow:"scroll",
-        margin:"10px 10px",
+        margin:"10px 4%",
         padding:"2px 10px",
         border:"1px solid #999",
         borderRadius:"20px"
@@ -334,11 +343,11 @@ const styles={
     },
     searchArea:{
         marginTop:"20px",
-        padding:"0 10px",
+        padding:"0 20px",
         margin:"0",
     },
     searchBox:{
-        border:"2px solid black",
+        
         borderRadius:"20px",
         margin:"0",
         padding:"0",
@@ -421,11 +430,17 @@ const styles={
         pointerEvents:"none"
     },
     sort:{
-        border:"1px solid black",
+        
         borderRadius:"20px",
         textAlign:"center",
         padding:"0 10px",
         transistionDuration:"200ms",
+        cursor:"pointer"
+    },
+    selectorContainer:{
+        marginTop:"20px",
+        border:"1px solid #999",
+        borderRadius:"20px",
     },
     dropDown:{
         position:"absolute",
@@ -434,7 +449,7 @@ const styles={
         marginTop:"-50px",
         backgroundColor:"white",
         textAlign:"center",
-        border:"1px solid black",
+        border:"1px solid #999",
         borderRadius:"20px",
         
     },

@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Main from './Components/Main/Main';
 import reportWebVitals from './reportWebVitals';
-import {ProfileDataStore} from './Components/store/profileDataStore'
-import Profile from './Components/Profile/Profile';
+import "./css/globalStyle.css"
+
 
 
 
