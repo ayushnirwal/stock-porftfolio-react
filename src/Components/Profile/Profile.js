@@ -11,7 +11,13 @@ const Profile = observer(({data}) => {
         const pickedPrice = company.pickedPrice;
         const curPrice = ProfilesStoreInstance.niftyList.filter((ins)=>ins.name == company.name)[0].curPrice;
         
-        const change = curPrice-pickedPrice;
+        let change = ((pickedPrice-curPrice)/pickedPrice)*100;
+
+        change = (Math.floor(change * 100) / 100);
+
+        if (company.type == "sell"){
+            change*=-1;
+        }
 
         const arrow = ()=>{
             if (change>0)
@@ -36,6 +42,7 @@ const Profile = observer(({data}) => {
         );
         
     });
+    totalChange = (Math.floor(totalChange * 100) / 100);
     let profileList1 =undefined;
     let profileList2 =undefined;
     if (profileList.length <5){

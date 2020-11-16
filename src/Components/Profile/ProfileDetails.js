@@ -60,12 +60,12 @@ const ProfileDetails = observer(({profileId,dismiss}) => {
                 const pickedPrice = data.pickedPrice;
                 const curPrice = ProfilesStoreInstance.niftyList.filter((ins)=>ins.name == data.name)[0].curPrice;
                 
-                let change = 0;
-                if (data.type == "buy"){
-                    change = curPrice-pickedPrice;
-                }
-                else{
-                    change = pickedPrice-curPrice;
+                let change = ((pickedPrice-curPrice)/pickedPrice)*100;
+
+                change = (Math.floor(change * 100) / 100);
+
+                if (data.type == "sell"){
+                    change*=-1;
                 }
                 
                 totalChange += change;
@@ -104,6 +104,7 @@ const ProfileDetails = observer(({profileId,dismiss}) => {
                     </div>
                 )
             })
+            totalChange = (Math.floor(totalChange * 100) / 100);
 
             return(
                 <div style={(animateIn == "in")?boxin:boxout} >

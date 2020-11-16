@@ -27,11 +27,16 @@ const AddProfile = observer(({show,dismiss}) => {
     const setNiftyListFromSearch =(text) =>{
         
         
-        if(sortBy === "name")
+        if(sortBy === "name"){
             setFilteredNiftyList(ProfilesStoreInstance.niftyListbyName.filter((ins)=>ins.name.includes(text)));
             
-        else if(sortBy === "price")
+        }
+            
+            
+        else if(sortBy === "price"){
             setFilteredNiftyList(ProfilesStoreInstance.niftyListbyPrice.filter((ins)=>ins.name.includes(text)));
+        }
+            
         
         
     }
@@ -92,24 +97,12 @@ const AddProfile = observer(({show,dismiss}) => {
     }
 
     const boxin = {
-        position:"fixed",
-        top:"0",
-        left:"0",
-        width:"100%",
-        height:"100vh",
-        overflow:"scroll",
-        backgroundColor: "white",
+        ...styles.box,
         animationName:"slidefromabove",
         animationDuration:"200ms",
     }
     const boxout = {
-        position:"fixed",
-        top:"0",
-        left:"0",
-        width:"100%",
-        height:"100vh",
-        overflow:"scroll",
-        backgroundColor: "white",
+        ...styles.box,
         animationName:"slidebackabove",
         animationDuration:"200ms",
     }
@@ -171,6 +164,7 @@ const AddProfile = observer(({show,dismiss}) => {
                     companyState="buy"
                 if(sell.find( (inst)=>inst.name == company.name))
                     companyState="sell"
+                const arrow = (company.percentIncrease>=0)?(<i className="material-icons right-align" style={{color:"green"}}> arrow_drop_up </i>):(<i className="material-icons right-align" style={{color:"red"}}> arrow_drop_down </i>);
                 return(
                     <div key = {company.name} style={{...styles.companyBubble,backgroundColor:(companyState != "none")?((companyState == "buy")?"#42f593":"#eb9d96"):"#B6CFF4"}} >
                         <div className="row" style={{margin:"0",padding:"0"}}>
@@ -183,7 +177,7 @@ const AddProfile = observer(({show,dismiss}) => {
                             </div>
                             <div className="col s4 row">
                                 <p className="col s6" style={styles.companyPrice}>{company.curPrice}</p>
-                                <p className="col s6" style={styles.companyPrice}>(+10%)</p>
+                                <p className="col s6" style={styles.companyPrice}>{company.percentIncrease}{arrow}</p>
                             </div>
                         </div>
     
@@ -226,11 +220,11 @@ const AddProfile = observer(({show,dismiss}) => {
                 <div style={(animateIn == "in")?boxin:boxout} >
                     
                     <p style={styles.head} className="container center-align"> 
-                        You can add any 10 stock from the list of Nifty 50 to create a portfolio
+                        You can add any 10 stock options from the list of Nifty 50 to create a portfolio
                     </p>
 
                     <div style={styles.nameFieldContainer} className="container row valign-wrapper">
-                        <input className="container col l6 s11 center-align" style={styles.nameField} type="text" placeholder="Add Profile Name" onChange={(e)=>{setName(e.target.value)}}/> 
+                        <input className="container col s12 center-align" style={styles.nameField} type="text" placeholder="Add Profile Name" onChange={(e)=>{setName(e.target.value)}}/> 
                     </div>
 
                     <div className="row" style={{margin:"0"}}>
@@ -294,7 +288,7 @@ const AddProfile = observer(({show,dismiss}) => {
                             {niftyList}
                         </div>
                         
-                        <div style={{width:"100%"}} className="row">
+                        <div style={styles.endButtonContainer} className="row">
                             <p onClick={()=>{out()}} style={styles.button} className=" col s5 center-align"> Discard </p>
                             <p onClick={()=>{addProfile()}} style={styles.button} className="col s5 center-align"> add </p>
                         </div>
@@ -307,12 +301,21 @@ const AddProfile = observer(({show,dismiss}) => {
     }
 })
 const styles={
+    box:{
+        position:"fixed",
+        top:"0",
+        left:"0",
+        width:"100%",
+        height:"100vh",
+        overflow:"scroll",
+        backgroundColor: "#B6CFF4",
+    },
     
     head:{
         fontSize:"1rem",
         
         width:"80%",
-        margin:"5px auto",
+        margin:"0px auto",
         backgroundColor:"#B6CFF4",
         padding:"10px",
         marginTop:"20px",
@@ -327,6 +330,7 @@ const styles={
         color:"white",
         backgroundColor:"#4D85F1",
         boxShadow:"2px 2px 20px #888",
+        cursor:"pointer",
 
     },
     smallHead:{
@@ -340,8 +344,10 @@ const styles={
         overflow:"scroll",
         margin:"10px 4%",
         padding:"2px 10px",
-        border:"1px solid #999",
-        borderRadius:"20px"
+        
+        borderRadius:"20px",
+        backgroundColor:"white",
+        boxShadow:"2px 2px 20px #888"
     },
     bubble:{
         fontSize:"0.8rem",
@@ -357,6 +363,9 @@ const styles={
         marginTop:"20px",
         padding:"0 20px",
         margin:"0",
+        backgroundColor:"white",
+        borderTopLeftRadius:"20px",
+        borderTopRightRadius:"20px"
     },
     searchBox:{
         
@@ -407,22 +416,24 @@ const styles={
     niftyListContainer:{
         height:"35vh",
         overflow:"scroll",
+        backgroundColor:"white",
     },
     errorBox:{
         position:"fixed",
         width:"70%",
+        padding:"0 10px",
         boxShadow:"2px 2px 20px #888",
         zIndex:20,
         borderRadius:"20px",
         left:"15%",
         top:"20%",
-        backgroundColor:"white",
+        backgroundColor:"#4D85F1",
         transistionDuration:"1s",
         
     },
     errorMsg:{
-        color:"red",
-        fontSize:"2rem",
+        color:"white",
+        fontSize:"1.6rem",
         fontWeight:"bold",
         width:"100%",
         textAlign:"center",
@@ -433,6 +444,7 @@ const styles={
         textAlign:"right",
         marginTop:"20px",
         marginLeft:"20px",
+        cursor:"pointer",
     },
     show:{
         opacity:1,
@@ -452,7 +464,7 @@ const styles={
     },
     selectorContainer:{
         marginTop:"20px",
-        border:"1px solid #999",
+        boxShadow:"2px 2px 20px #888",
         borderRadius:"20px",
     },
     dropDown:{
@@ -468,10 +480,18 @@ const styles={
     },
     nameFieldContainer:{
         height:"10vh",
-        margin:"0 10px"
+        padding:"0 20px",
+        backgroundColor:"white",
+        borderRadius:"20px",
+        boxShadow:"2px 2px 20px #888",
     },
     refresh:{
         color:"#888"
+    },
+    endButtonContainer:{
+        borderBottomLeftRadius:"20px",
+        borderBottomRightRadius:"20px",
+        backgroundColor:"white",
     }
     
 }
