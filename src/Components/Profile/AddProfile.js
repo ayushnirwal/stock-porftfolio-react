@@ -150,6 +150,10 @@ const AddProfile = observer(({show,dismiss}) => {
         
 
     }
+    const changeSortBy =(type) =>{
+        setShowDrop(false);
+        setSortBy(type);
+    }
     
     if (show == false){
         return(
@@ -254,26 +258,34 @@ const AddProfile = observer(({show,dismiss}) => {
                             <div style={styles.searchBox} className="row col s8 valign-wrapper">
                                 <input className="col s8" style={styles.searchField} type="text" placeholder="Search" onChange={(e)=>{setSearchName(e.target.value)}}/> 
                                 
-                                <i className="material-icons col s2"> search </i>
+                                <i onClick={()=>{setNiftyListFromSearch(searchName)}} className="material-icons col s2"> search </i>
+                                
                                 
                                 
                             </div>
                             <div className="col s3" >
-                                <div style={styles.sort} onClick={()=>{setShowDrop(true)}}>
-                                    <span>{sortBy}</span>
-                                    <i className="material-icons right-align" > arrow_drop_down </i>
+                                <div style={styles.sort} className="row" >
+                                    <span onClick={()=>{setShowDrop(true)}} className="col s8">
+                                        <span>{sortBy}</span>
+                                        <i className="material-icons right-align" > arrow_drop_down </i>
+                                    </span>
+                                    <div className="col s4">
+                                        <i onClick={()=>{setNiftyListFromSearch(searchName)}} style={styles.refresh} className="material-icons"> refresh </i>
+                                    </div>
+                                    
                                 </div>
                                 
                                 <div style={{...styles.dropDown,...((showDrop)?styles.show:styles.hide)}} >
-                                    <div onClick={()=>{setSortBy("name")}} style={{cursor:"pointer"}}>
-                                        <p onClick={()=>{setSortBy("name")}} >sort by name</p>
+                                    <div onClick={()=>{changeSortBy("name")}} style={{cursor:"pointer"}}>
+                                        <p onClick={()=>{changeSortBy("name")}} >sort by name</p>
                                     </div>
-                                    <div onClick={()=>{setSortBy("price")}} style={{cursor:"pointer"}} >
-                                        <p onClick={()=>{setSortBy("price")}}>sort by price</p>
+                                    <div onClick={()=>{changeSortBy("price")}} style={{cursor:"pointer"}} >
+                                        <p onClick={()=>{changeSortBy("price")}}>sort by price</p>
                                     </div>
                                     
                                     
                                 </div>
+                                
                             </div>
                         </div>
                         
@@ -388,7 +400,8 @@ const styles={
         backgroundColor:"#4D85F1",
         color:"white",
         borderRadius:"20px",
-        boxShadow:"2px 2px 20px #999"
+        boxShadow:"2px 2px 20px #999",
+        cursor:"pointer"
     },
 
     niftyListContainer:{
@@ -430,7 +443,7 @@ const styles={
         pointerEvents:"none"
     },
     sort:{
-        
+        margin:"0",
         borderRadius:"20px",
         textAlign:"center",
         padding:"0 10px",
@@ -457,6 +470,9 @@ const styles={
         height:"10vh",
         margin:"0 10px"
     },
+    refresh:{
+        color:"#888"
+    }
     
 }
  

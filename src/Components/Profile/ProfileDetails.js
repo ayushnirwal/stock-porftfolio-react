@@ -163,6 +163,7 @@ const styles={
         color:"white",
         backgroundColor:"#4D85F1",
         boxShadow:"2px 2px 20px #888",
+        cursor:"pointer",
 
     },
     tableHead:{
@@ -181,6 +182,9 @@ const styles={
         borderBottom:"1px solid #888",
         margin:"0 10px",
         padding:"10px 0",
+    },
+    pointer:{
+        cursor:"pointer"
     }
 }
  

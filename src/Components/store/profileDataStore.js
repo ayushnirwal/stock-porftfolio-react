@@ -371,12 +371,14 @@ class ProfileDataStore {
         this.niftyList = newNifty;
     }
     get niftyListbyName (){
-        const newNifty = this.niftyList.sort((a,b)=>(a.name>b.name)?1:-1);
-        return newNifty;
+        const copyNifty = this.niftyList;
+        copyNifty.sort((a,b)=>(a.name>b.name)?1:-1);
+        return copyNifty;
     }
     get niftyListbyPrice (){
-        const newNifty = this.niftyList.sort((a,b)=>(a.price>b.price)?1:-1);
-        return newNifty;
+        const copyNifty = this.niftyList;
+        copyNifty.sort((a,b)=>(a.name>b.name)?1:-1);
+        return copyNifty;
     }
     update(){
         this.value+=1;
