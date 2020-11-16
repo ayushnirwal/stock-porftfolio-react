@@ -16,7 +16,7 @@ const ProfileMain = observer(() => {
     
     const profileList = ProfilesStoreInstance.profileList.map((profileData)=>{
         
-        
+        if(profileData!=undefined)
         return(
             <div key = {profileData.name} onClick={()=>{setprofileDetailId(profileData.name)}}>
                 <Profile  data = {profileData} />

@@ -8,22 +8,12 @@ const ProfileDetails = observer(({profileId,dismiss}) => {
     const [animateIn,setAnimateIn] = useState("in")
 
     const boxin = {
-        position:"fixed",
-        top:"0",
-        left:"0",
-        width:"100%",
-        height:"100vh",
-        overflow:"scroll",
-        backgroundColor: "#B6CFF4",
+        ...styles.box,
         animationName:"slidefromabove",
         animationDuration:"200ms",
     }
     const boxout = {
-        position:"fixed",
-        top:"0",
-        left:"0",
-        width:"100%",
-        backgroundColor: "#B6CFF4",
+        ...styles.box,
         animationName:"slidebackabove",
         animationDuration:"200ms",
     }
@@ -50,7 +40,7 @@ const ProfileDetails = observer(({profileId,dismiss}) => {
         if (profileData==undefined){
             return(
                 <div>
-
+                    {/* intentionally blank */}
                 </div>
             )
         }
@@ -100,6 +90,7 @@ const ProfileDetails = observer(({profileId,dismiss}) => {
                             {arrow()}
                         
                         </div>
+                        <i className="material-icons" style={{color:"#888",cursor:"pointer"}} onClick = {()=>{ProfilesStoreInstance.delFromProfile(profileData.name,data.name)}}> close </i>
                         
                     </div>
                 )
@@ -146,6 +137,16 @@ const ProfileDetails = observer(({profileId,dismiss}) => {
     }
 })
 const styles={
+    box:{
+        position:"fixed",
+        zIndex:2,
+        top:"0",
+        left:"0",
+        width:"100%",
+        height:"100vh",
+        overflow:"scroll",
+        backgroundColor: "#B6CFF4",
+    },
     
     dataContainer:{
         height:"60vh",

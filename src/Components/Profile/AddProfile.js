@@ -307,6 +307,7 @@ const styles={
         left:"0",
         width:"100%",
         height:"100vh",
+        zIndex:2,
         overflow:"scroll",
         backgroundColor: "#B6CFF4",
     },

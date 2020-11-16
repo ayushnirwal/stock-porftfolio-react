@@ -370,9 +370,34 @@ class ProfileDataStore {
         
     }
     delProfile(name){
-        const newProfileList =  this.profileList.filter((ins)=>ins.name!=name);
+        let newProfileList =  this.profileList.filter((ins)=>ins.name!=name);
+        newProfileList = newProfileList.filter((inst)=>inst!=undefined);
         this.profileList = newProfileList;
         
+    }
+    delFromProfile(name,companyName){
+        let newProfileList = this.profileList.map((inst)=>{
+            if (inst.name!= name){
+                return inst;
+            }
+            else{
+                const newCompanyList = inst.companyList.filter((company)=>company.name != companyName);
+                if (newCompanyList.length >0){
+                    return{
+                        ...inst,
+                        companyList:newCompanyList
+                    }
+                }
+                else{
+                    this.delProfile(companyName);
+                }
+                
+            }
+        })
+        console.log("deleting",name,companyName)
+        newProfileList = newProfileList.filter((inst)=>inst!=undefined)
+
+        this.profileList = newProfileList;
     }
     addProfile (name,buy,sell){
         const buyCompanyList = buy.map((instance)=>{
