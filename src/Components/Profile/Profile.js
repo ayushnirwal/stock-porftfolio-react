@@ -20,7 +20,7 @@ const Profile = observer(({data}) => {
         }
 
         const arrow = ()=>{
-            if (change>0)
+            if (change<0)
                 return(
                     <i className="material-icons" style={{color:"red"}}> arrow_drop_down </i>
                 )
